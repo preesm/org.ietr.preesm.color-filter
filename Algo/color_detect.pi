@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+    <key attr.name="parameters" for="graph" id="parameters"/>
+    <key attr.name="variables" for="graph" id="variables"/>
+    <key attr.name="arguments" for="node" id="arguments"/>
+    <key attr.name="name" attr.type="string" for="graph"/>
+    <key attr.name="graph_desc" attr.type="string" for="node"/>
+    <graph edgedefault="directed">
+        <data key="name">color_detect</data>
+        <node expr="540" id="ROWS" kind="param"/>
+        <node expr="720" id="COLS" kind="param"/>
+        <node id="source" kind="src">
+            <port annotation="NONE" expr="ROWS*COLS*3"
+                kind="output" name="source"/>
+        </node>
+        <node id="sink" kind="snk">
+            <port annotation="NONE" expr="COLS*ROWS" kind="input" name="sink"/>
+        </node>
+        <node id="thresholds" kind="src">
+            <port annotation="NONE" expr="2" kind="output" name="thresholds"/>
+        </node>
+        <node id="ColorDetect" kind="actor">
+            <data key="graph_desc">Code/include/color_detect.hpp</data>
+            <loop isCPPdefinition="true" name="color_detect_h_8bits&lt;ROWS,COLS>">
+                <param direction="IN" isCPPdefinition="true"
+                    isConfig="false" isPassedByReference="true"
+                    name="src" type="hls::stream&lt;ap_uint&lt;10>>"/>
+                <param direction="IN" isCPPdefinition="true"
+                    isConfig="false" isPassedByReference="true"
+                    name="thresholds" type="hls::stream&lt;ap_uint&lt;16>>"/>
+                <param direction="OUT" isCPPdefinition="true"
+                    isConfig="false" isPassedByReference="true"
+                    name="snk" type="hls::stream&lt;ap_uint&lt;8>>"/>
+            </loop>
+            <port kind="cfg_input" name="COLS"/>
+            <port kind="cfg_input" name="ROWS"/>
+            <port annotation="NONE" expr="COLS*ROWS" kind="input" name="src"/>
+            <port annotation="NONE" expr="2" kind="input" name="thresholds"/>
+            <port annotation="NONE" expr="COLS*ROWS"
+                kind="output" name="snk"/>
+        </node>
+        <node id="RGBtoH" kind="actor">
+            <data key="graph_desc">Code/include/rgb_to_hsv.hpp</data>
+            <loop name="rgb_to_h">
+                <param direction="IN" isCPPdefinition="true"
+                    isConfig="false" isPassedByReference="true"
+                    name="source" type="hls::stream&lt;ap_uint&lt;8>>"/>
+                <param direction="OUT" isCPPdefinition="true"
+                    isConfig="false" isPassedByReference="true"
+                    name="sink" type="hls::stream&lt;ap_uint&lt;10>>"/>
+            </loop>
+            <port annotation="NONE" expr="3" kind="input" name="source"/>
+            <port annotation="NONE" expr="1" kind="output" name="sink"/>
+        </node>
+        <node id="Erosion_1" kind="actor">
+            <data key="graph_desc">Code/include/erosion.hpp</data>
+            <loop isCPPdefinition="true" name="erosion&lt;ROWS,COLS,T>">
+                <param direction="IN" isCPPdefinition="true"
+                    isConfig="false" isPassedByReference="true"
+                    name="src" type="hls::stream&lt;T>"/>
+                <param direction="OUT" isCPPdefinition="true"
+                    isConfig="false" isPassedByReference="true"
+                    name="snk" type="hls::stream&lt;T>"/>
+            </loop>
+            <port kind="cfg_input" name="COLS"/>
+            <port kind="cfg_input" name="ROWS"/>
+            <port annotation="NONE" expr="COLS*ROWS" kind="input" name="src"/>
+            <port annotation="NONE" expr="COLS*ROWS"
+                kind="output" name="snk"/>
+        </node>
+        <node id="Erosion_2" kind="actor">
+            <data key="graph_desc">Code/include/erosion.hpp</data>
+            <loop isCPPdefinition="true" name="erosion&lt;ROWS,COLS,T>">
+                <param direction="IN" isCPPdefinition="true"
+                    isConfig="false" isPassedByReference="true"
+                    name="src" type="hls::stream&lt;T>"/>
+                <param direction="OUT" isCPPdefinition="true"
+                    isConfig="false" isPassedByReference="true"
+                    name="snk" type="hls::stream&lt;T>"/>
+            </loop>
+            <port kind="cfg_input" name="COLS"/>
+            <port kind="cfg_input" name="ROWS"/>
+            <port annotation="NONE" expr="COLS*ROWS" kind="input" name="src"/>
+            <port annotation="NONE" expr="COLS*ROWS"
+                kind="output" name="snk"/>
+        </node>
+        <node id="Dilation_1" kind="actor">
+            <data key="graph_desc">Code/include/dilation.hpp</data>
+            <loop isCPPdefinition="true" name="dilation&lt;ROWS,COLS,T>">
+                <param direction="IN" isCPPdefinition="true"
+                    isConfig="false" isPassedByReference="true"
+                    name="src" type="hls::stream&lt;T>"/>
+                <param direction="OUT" isCPPdefinition="true"
+                    isConfig="false" isPassedByReference="true"
+                    name="snk" type="hls::stream&lt;T>"/>
+            </loop>
+            <port kind="cfg_input" name="COLS"/>
+            <port kind="cfg_input" name="ROWS"/>
+            <port annotation="NONE" expr="COLS*ROWS" kind="input" name="src"/>
+            <port annotation="NONE" expr="COLS*ROWS"
+                kind="output" name="snk"/>
+        </node>
+        <node id="Dilation_2" kind="actor">
+            <data key="graph_desc">Code/include/dilation.hpp</data>
+            <loop isCPPdefinition="true" name="dilation&lt;ROWS,COLS,T>">
+                <param direction="IN" isCPPdefinition="true"
+                    isConfig="false" isPassedByReference="true"
+                    name="src" type="hls::stream&lt;T>"/>
+                <param direction="OUT" isCPPdefinition="true"
+                    isConfig="false" isPassedByReference="true"
+                    name="snk" type="hls::stream&lt;T>"/>
+            </loop>
+            <port kind="cfg_input" name="COLS"/>
+            <port kind="cfg_input" name="ROWS"/>
+            <port annotation="NONE" expr="COLS*ROWS" kind="input" name="src"/>
+            <port annotation="NONE" expr="COLS*ROWS"
+                kind="output" name="snk"/>
+        </node>
+        <edge kind="fifo" source="thresholds"
+            sourceport="thresholds" target="ColorDetect"
+            targetport="thresholds" type="ap_uint&lt;16>"/>
+        <edge kind="fifo" source="source" sourceport="source"
+            target="RGBtoH" targetport="source" type="ap_uint&lt;8>"/>
+        <edge kind="fifo" source="RGBtoH" sourceport="sink"
+            target="ColorDetect" targetport="src" type="ap_uint&lt;10>"/>
+        <edge kind="fifo" source="ColorDetect" sourceport="snk"
+            target="Erosion_1" targetport="src" type="ap_uint&lt;8>"/>
+        <edge kind="fifo" source="Erosion_1" sourceport="snk"
+            target="Dilation_1" targetport="src" type="ap_uint&lt;8>"/>
+        <edge kind="fifo" source="Dilation_1" sourceport="snk"
+            target="Dilation_2" targetport="src" type="ap_uint&lt;8>"/>
+        <edge kind="fifo" source="Dilation_2" sourceport="snk"
+            target="Erosion_2" targetport="src" type="ap_uint&lt;8>"/>
+        <edge kind="fifo" source="Erosion_2" sourceport="snk"
+            target="sink" targetport="sink" type="ap_uint&lt;8>"/>
+        <edge kind="dependency" source="ROWS" target="source"/>
+        <edge kind="dependency" source="COLS" target="source"/>
+        <edge kind="dependency" source="COLS" target="sink"/>
+        <edge kind="dependency" source="ROWS" target="sink"/>
+        <edge kind="dependency" source="COLS"
+            target="ColorDetect" targetport="COLS"/>
+        <edge kind="dependency" source="ROWS"
+            target="ColorDetect" targetport="ROWS"/>
+        <edge kind="dependency" source="COLS" target="Erosion_1" targetport="COLS"/>
+        <edge kind="dependency" source="ROWS" target="Erosion_1" targetport="ROWS"/>
+        <edge kind="dependency" source="COLS" target="Erosion_2" targetport="COLS"/>
+        <edge kind="dependency" source="ROWS" target="Erosion_2" targetport="ROWS"/>
+        <edge kind="dependency" source="COLS" target="Dilation_1" targetport="COLS"/>
+        <edge kind="dependency" source="ROWS" target="Dilation_1" targetport="ROWS"/>
+        <edge kind="dependency" source="COLS" target="Dilation_2" targetport="COLS"/>
+        <edge kind="dependency" source="ROWS" target="Dilation_2" targetport="ROWS"/>
+    </graph>
+</graphml>

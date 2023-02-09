@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario>
+    <flags>
+        <sizesAreInBit/>
+    </flags>
+    <files>
+        <algorithm url="/org.ietr.preesm.color-filter/Algo/color_filter.pi"/>
+        <architecture url="/org.ietr.preesm.color-filter/Archi/PYNQ.slam"/>
+        <codegenDirectory url="/org.ietr.preesm.color-filter/Code/generated"/>
+    </files>
+    <constraints excelUrl="">
+        <constraintGroup>
+            <operator name="Zynq"/>
+            <task name="color_filter/ColorDetect"/>
+            <task name="color_filter/RGBtoH"/>
+            <task name="color_filter/Erosion_1"/>
+            <task name="color_filter/Erosion_2"/>
+            <task name="color_filter/Dilation_1"/>
+            <task name="color_filter/Dilation_2"/>
+            <task name="color_filter/Filter"/>
+            <task name="color_filter"/>
+        </constraintGroup>
+    </constraints>
+    <timings excelUrl="">
+        <timing opname="FPGA" time="388806"
+            timingtype="EXECUTION_TIME" vertexname="color_filter/ColorDetect"/>
+        <timing opname="FPGA" time="388806"
+            timingtype="INITIATION_INTERVAL" vertexname="color_filter/ColorDetect"/>
+        <timing opname="FPGA" time="390070"
+            timingtype="EXECUTION_TIME" vertexname="color_filter/Dilation_1"/>
+        <timing opname="FPGA" time="390070"
+            timingtype="INITIATION_INTERVAL" vertexname="color_filter/Dilation_1"/>
+        <timing opname="FPGA" time="390070"
+            timingtype="EXECUTION_TIME" vertexname="color_filter/Dilation_2"/>
+        <timing opname="FPGA" time="390070"
+            timingtype="INITIATION_INTERVAL" vertexname="color_filter/Dilation_2"/>
+        <timing opname="FPGA" time="390070"
+            timingtype="EXECUTION_TIME" vertexname="color_filter/Erosion_1"/>
+        <timing opname="FPGA" time="390070"
+            timingtype="INITIATION_INTERVAL" vertexname="color_filter/Erosion_1"/>
+        <timing opname="FPGA" time="390070"
+            timingtype="EXECUTION_TIME" vertexname="color_filter/Erosion_2"/>
+        <timing opname="FPGA" time="390070"
+            timingtype="INITIATION_INTERVAL" vertexname="color_filter/Erosion_2"/>
+        <timing opname="FPGA" time="4"
+            timingtype="EXECUTION_TIME" vertexname="color_filter/Filter"/>
+        <timing opname="FPGA" time="3"
+            timingtype="INITIATION_INTERVAL" vertexname="color_filter/Filter"/>
+        <timing opname="FPGA" time="20"
+            timingtype="EXECUTION_TIME" vertexname="color_filter/RGBtoH"/>
+        <timing opname="FPGA" time="3"
+            timingtype="INITIATION_INTERVAL" vertexname="color_filter/RGBtoH"/>
+        <memcpyspeed opname="FPGA" setuptime="1" timeperunit="0.001"/>
+    </timings>
+    <simuParams>
+        <mainCore/>
+        <mainComNode/>
+        <averageDataSize>1000</averageDataSize>
+        <dataTypes>
+            <dataType name="ap_uint&lt;8>" size="8"/>
+            <dataType name="ap_uint&lt;10>" size="10"/>
+            <dataType name="ap_uint&lt;16>" size="16"/>
+            <dataType name="ap_uint&lt;1>" size="1"/>
+        </dataTypes>
+        <specialVertexOperators>
+            <specialVertexOperator path="Zynq"/>
+        </specialVertexOperators>
+    </simuParams>
+    <parameterValues/>
+    <papifyConfigs xmlUrl=""/>
+    <energyConfigs xmlUrl="">
+        <performanceObjective objectiveEPS="0.0"/>
+        <pePower opName="Base" pePower="10.0"/>
+        <pePower opName="defaultFPGA" pePower="10.0"/>
+        <peActorsEnergy/>
+    </energyConfigs>
+</scenario>
