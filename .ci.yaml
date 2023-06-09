@@ -1,0 +1,3 @@
+config:
+- {scenario: color_detect.scenario, workflow: FPGAanalysis.workflow}
+- {scenario: color_filter.scenario, workflow: FPGAanalysis.workflow}
