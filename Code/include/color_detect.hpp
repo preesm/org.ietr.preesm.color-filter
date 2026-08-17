@@ -26,6 +26,7 @@ void color_detect_hsv(hls::stream<ap_uint<10>> &src, hls::stream<ap_uint<16>> &t
 			} else {
 				out_val = 0;
 			}
+			snk.write(out_val);
 		}
 	}
 }
