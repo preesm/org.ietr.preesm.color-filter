@@ -16,10 +16,15 @@ void color_detect_hsv(hls::stream<ap_uint<10>> &src, hls::stream<ap_uint<16>> &t
 			auto h = src.read();
 			auto s = src.read();
 			auto v = src.read();
+			// LightningSim does NOT support "dynamic" interactions with streams
+			// and it does not notice that we write to the stream in any case
+			// so we have to be explicit
+			ap_uint<RESULT_SIZE> out_val;
+
 			if (h >= low_threshold and h <= high_threshold) {
-				snk.write((1 << RESULT_SIZE) - 1);
+				out_val = (1 << RESULT_SIZE) - 1;
 			} else {
-				snk.write(0);
+				out_val = 0;
 			}
 		}
 	}
@@ -35,11 +40,18 @@ void color_detect_h(hls::stream<ap_uint<10>> &src, hls::stream<ap_uint<16>> &thr
 		loop_cols: for (int col = 0; col < COLS; col++) {
 #pragma HLS PIPELINE II=1
 			auto h = src.read();
+
+			// LightningSim does NOT support "dynamic" interactions with streams
+			// and it does not notice that we write to the stream in any case
+			// so we have to be explicit
+			ap_uint<RESULT_SIZE> out_val;
+
 			if (h >= low_threshold and h <= high_threshold) {
-				snk.write((1 << RESULT_SIZE) - 1);
+				out_val = (1 << RESULT_SIZE) - 1;
 			} else {
-				snk.write(0);
+				out_val = 0;
 			}
+			snk.write(out_val);
 		}
 	}
 }

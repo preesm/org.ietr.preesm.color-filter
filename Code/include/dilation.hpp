@@ -23,7 +23,8 @@ template<typename T> T dilation_f(T data[3][3]) {
 
 template<int ROWS, int COLS, typename T>
 void dilation(hls::stream<T> &src, hls::stream<T> &snk) {
-	filter_border3x3<ROWS, COLS>(src, snk, *dilation_f<T>);
+	/*filter_border3x3<ROWS, COLS>(src, snk, *dilation_f<T>);*/
+	filter_border3x3_static_accesses<ROWS, COLS>(src, snk, *dilation_f<T>);
 }
 
 #endif //DILATION_HPP
